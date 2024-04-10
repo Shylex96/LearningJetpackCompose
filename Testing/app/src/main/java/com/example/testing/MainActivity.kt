@@ -1,17 +1,28 @@
 package com.example.testing
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -19,13 +30,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -46,7 +60,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column() {
-                        MyButtonExample()
+                        MyProgressBar()
                     }
 
                 }
@@ -59,23 +73,73 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     TestingTheme {
-        MyButtonExample()
+        MyProgressBar()
     }
 }
 
 @Composable
+fun MyProgressBar() {
+    Column(
+        Modifier
+            .padding(24.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(color = Color.Blue, strokeWidth = 5.dp)
+        LinearProgressIndicator(
+            modifier = Modifier.padding(top = 50.dp), color = Color.Blue
+        )
+    }
+}
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
+fun MyIcon() {
+    Icon(
+        imageVector = Icons.Rounded.Star,
+        contentDescription = "Icono",
+        tint = Color.Red
+    )
+}
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
+fun MyImage() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = "Ejemplo",
+        alpha = 0.7f,
+        modifier = Modifier
+            .clip(RoundedCornerShape(25f))
+            .border(2.dp, Color.Red, CircleShape)
+    )
+}
+
+// .clip(CircleShape)
+// modifier = Modifier.clip(CircleShape)
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
 fun MyButtonExample() {
+    var enabled by rememberSaveable { mutableStateOf(true) }
+
     Column(
         Modifier
             .fillMaxSize()
             .padding(24.dp)
     ) {
         Button(
-            onClick = { },
+            onClick = { enabled = false },
+            enabled = enabled,
             colors = ButtonDefaults.buttonColors(
-                contentColor = Color.Black
-        ),
-        border = BorderStroke(5.dp, Color.Green)
+                containerColor = Color.Blue,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp, Color.Green)
         ) {
             Text(text = "Botón")
         }
