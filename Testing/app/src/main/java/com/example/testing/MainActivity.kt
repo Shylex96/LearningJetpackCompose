@@ -9,24 +9,34 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -86,7 +96,7 @@ class MainActivity : ComponentActivity() {
                     }
                     */
                     Column {
-                        MyRadioButtonList()
+                        MyDropDownMenu()
                     }
                 }
             }
@@ -101,6 +111,79 @@ fun DefaultPreview() {
         MyCheckBoxWithText()
     }
 }
+
+// ---------------------------------------------------------------------------- \\
+
+
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
+fun MyDivider() {
+    Divider(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp), color = Color.Red
+    )
+}
+
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
+fun MyBadgeBox() {
+    Box(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = "",
+            tint = Color.Green
+        )
+        Box(
+            modifier = Modifier
+                .offset(x = 16.dp, y = 0.dp)
+                .clip(CircleShape)
+                .background(Color.Blue)
+                .padding(horizontal = 4.dp, vertical = 2.dp)
+        ) {
+            Text(
+                text = "5",
+                color = Color.White,
+                fontSize = 8.sp
+            )
+        }
+    }
+}
+
+
+// ---------------------------------------------------------------------------- \\
+
+@Composable
+fun MyCard() {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        color = Color.Red,
+        shadowElevation = 12.dp,
+        shape = MaterialTheme.shapes.small
+    ) {
+        Card(
+            modifier = Modifier.fillMaxSize(),
+            border = BorderStroke(5.dp, Color.Green),
+        ) {
+            Column(Modifier.padding(16.dp)) {
+                Text(text = "Ejemplo 1", color = Color.Black)
+                Text(text = "Ejemplo 2", color = Color.Black)
+                Text(text = "Ejemplo 3", color = Color.Black)
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------- \\
+
 
 @Composable
 fun MyRadioButtonList() {
