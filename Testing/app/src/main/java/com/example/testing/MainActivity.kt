@@ -3,11 +3,14 @@ package com.example.testing
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -42,8 +45,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column(){
-                        MyTextFieldOutlined()
+                    Column() {
+                        MyButtonExample()
                     }
 
                 }
@@ -56,9 +59,31 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     TestingTheme {
-        MyTextField()
+        MyButtonExample()
     }
 }
+
+@Composable
+fun MyButtonExample() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+    ) {
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.Black
+        ),
+        border = BorderStroke(5.dp, Color.Green)
+        ) {
+            Text(text = "Botón")
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------- \\
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,7 +97,7 @@ fun MyTextFieldOutlined() {
             myText =
                 it
         }, modifier = Modifier.padding(24.dp),
-        label = { Text(text = "Escribe tu nombre")},
+        label = { Text(text = "Escribe tu nombre") },
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color.Blue,
             unfocusedBorderColor = Color.Black,
