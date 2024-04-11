@@ -68,7 +68,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.testing.ui.theme.AdvanceSlider
+import com.example.testing.ui.theme.BasicSlider
 import com.example.testing.ui.theme.CheckInfo
+import com.example.testing.ui.theme.MyRangeSlider
 import com.example.testing.ui.theme.TestingTheme
 
 class MainActivity : ComponentActivity() {
@@ -96,7 +99,7 @@ class MainActivity : ComponentActivity() {
                     }
                     */
                     Column {
-                        MyDropDownMenu()
+                        MyRangeSlider()
                     }
                 }
             }
