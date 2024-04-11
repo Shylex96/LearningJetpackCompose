@@ -2,6 +2,7 @@ package com.example.testing
 
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.util.Log
 import android.widget.CheckBox
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -71,7 +72,10 @@ import androidx.compose.ui.unit.sp
 import com.example.testing.ui.theme.AdvanceSlider
 import com.example.testing.ui.theme.BasicSlider
 import com.example.testing.ui.theme.CheckInfo
+import com.example.testing.ui.theme.MyCustomDialog
+import com.example.testing.ui.theme.MyDialog
 import com.example.testing.ui.theme.MyRangeSlider
+import com.example.testing.ui.theme.MySimpleCustomDialog
 import com.example.testing.ui.theme.TestingTheme
 
 class MainActivity : ComponentActivity() {
@@ -98,8 +102,28 @@ class MainActivity : ComponentActivity() {
                         MyCheckBoxWithText()
                     }
                     */
-                    Column {
-                        MyRangeSlider()
+
+                    /*
+                    var show by remember { mutableStateOf(false) }
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Button(onClick = { show = true }) {
+                            Text(text = "Mostrar diálogo")
+                        }
+                        MyDialog(
+                            show = show,
+                            onDismiss = {show = false},
+                            onConfirm = { Log.i("Dialog", "Se hizo click")})
+                     */
+
+                    var show by remember { mutableStateOf(false) }
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Button(onClick = { show = true }) {
+                            Text(text = "Mostrar diálogo")
+                        }
+                        MyCustomDialog(
+                            show = show,
+                            onDismiss = { show = false }
+                        )
                     }
                 }
             }
@@ -114,10 +138,6 @@ fun DefaultPreview() {
         MyCheckBoxWithText()
     }
 }
-
-// ---------------------------------------------------------------------------- \\
-
-
 
 // ---------------------------------------------------------------------------- \\
 
