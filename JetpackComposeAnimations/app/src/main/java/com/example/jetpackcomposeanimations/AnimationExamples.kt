@@ -1,6 +1,7 @@
 package com.example.jetpackcomposeanimations
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -9,7 +10,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -105,5 +109,18 @@ fun SizeAnimationAdvanced() {
 
 @Composable
 fun VisibilityAnimation() {
-
+    var isVisible by remember {
+        mutableStateOf(true)
+    }
+    Column(Modifier.fillMaxSize()) {
+        Button(onClick = { isVisible = !isVisible }) {
+            Text(text = "Mostrar/Ocultar")
+        }
+        Spacer(modifier = Modifier.size(50.dp))
+        AnimatedVisibility (isVisible) {
+            Box(modifier = Modifier
+                .size(150.dp)
+                .background(Color.Red))
+        }
+    }
 }
